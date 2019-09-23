@@ -31,6 +31,7 @@
 #include <map>
 #include <memory>
 #include <string>
+#include <typeinfo>
 #include <vector>
 
 namespace ujson {
@@ -721,8 +722,8 @@ inline void swap(value &lhs, value &rhs) noexcept { lhs.swap(rhs); }
 
 inline bool operator==(const value &lhs, const value &rhs) {
 
-    auto lhs_impl = lhs.impl();
-    auto rhs_impl = rhs.impl();
+    auto const lhs_impl = lhs.impl();
+    auto const rhs_impl = rhs.impl();
 
     if (typeid(*lhs_impl) != typeid(*rhs_impl))
         return false;
