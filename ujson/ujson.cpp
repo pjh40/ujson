@@ -161,12 +161,15 @@ utf8_to_utf32(const char *ptr) {
         case 3:
             utf32 += *utf8++;
             utf32 <<= 6;
+            [[fallthrough]];
         case 2:
             utf32 += *utf8++;
             utf32 <<= 6;
+            [[fallthrough]];
         case 1:
             utf32 += *utf8++;
             utf32 <<= 6;
+            [[fallthrough]];
         case 0:
             utf32 += *utf8++;
     }
@@ -197,12 +200,15 @@ static char *utf32_to_utf8(char *str, std::uint32_t cp) {
         case 4:
             str[3] = static_cast<char>((cp | 0x80) & 0xBF);
             cp >>= 6;
+            [[fallthrough]];
         case 3:
             str[2] = static_cast<char>((cp | 0x80) & 0xBF);
             cp >>= 6;
+            [[fallthrough]];
         case 2:
             str[1] = static_cast<char>((cp | 0x80) & 0xBF);
             cp >>= 6;
+            [[fallthrough]];
         case 1:
             str[0] = static_cast<char>(cp | offset[num_bytes]);
     }
